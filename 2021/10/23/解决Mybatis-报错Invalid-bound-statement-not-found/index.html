@@ -8,15 +8,22 @@
   <link rel="dns-prefetch" href="http://nero99999.github.io">
   <title>解决Mybatis 报错Invalid bound statement (not found) | Nero</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
+  <meta name="description" content="解决Mybatis 报错Invalid bound statement (not found)出现此错误的原因1.xml文件不存在2.xml文件和mapper没有映射上 namespace指定映射mapper的路径错误 id和mapper中的方法名不一致   3.xml文件在java目录下而不在resource目录下，因此生成target中无xml场景​    在使用Mybatis-plus框架时">
+<meta property="og:type" content="article">
 <meta property="og:title" content="解决Mybatis 报错Invalid bound statement (not found)">
 <meta property="og:url" content="http://nero99999.github.io/2021/10/23/%E8%A7%A3%E5%86%B3Mybatis-%E6%8A%A5%E9%94%99Invalid-bound-statement-not-found/index.html">
 <meta property="og:site_name" content="Nero">
+<meta property="og:description" content="解决Mybatis 报错Invalid bound statement (not found)出现此错误的原因1.xml文件不存在2.xml文件和mapper没有映射上 namespace指定映射mapper的路径错误 id和mapper中的方法名不一致   3.xml文件在java目录下而不在resource目录下，因此生成target中无xml场景​    在使用Mybatis-plus框架时">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gvpnb835pij60te05g0t802.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gvpmzlnvdzj60ek0z40vj02.jpg">
+<meta property="og:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gvpn2f2vraj60i00rggnl02.jpg">
 <meta property="article:published_time" content="2021-10-23T14:40:46.000Z">
-<meta property="article:modified_time" content="2021-10-23T14:40:46.243Z">
+<meta property="article:modified_time" content="2021-10-23T15:12:46.318Z">
 <meta property="article:author" content="Nero">
+<meta property="article:tag" content="踩坑记录">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tva1.sinaimg.cn/large/008i3skNgy1gvpnb835pij60te05g0t802.jpg">
   
     <link rel="alternative" href="/atom.xml" title="Nero" type="application/atom+xml">
   
@@ -188,7 +195,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text">  字数统计: </span>
-			<span class="post-count">0字</span>
+			<span class="post-count">411字</span>
 		</span>
 	</span>
 
@@ -207,7 +214,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="解决Mybatis-报错Invalid-bound-statement-not-found"><a href="#解决Mybatis-报错Invalid-bound-statement-not-found" class="headerlink" title="解决Mybatis 报错Invalid bound statement (not found)"></a>解决Mybatis 报错Invalid bound statement (not found)</h1><h2 id="出现此错误的原因"><a href="#出现此错误的原因" class="headerlink" title="出现此错误的原因"></a>出现此错误的原因</h2><h3 id="1-xml文件不存在"><a href="#1-xml文件不存在" class="headerlink" title="1.xml文件不存在"></a>1.xml文件不存在</h3><h3 id="2-xml文件和mapper没有映射上"><a href="#2-xml文件和mapper没有映射上" class="headerlink" title="2.xml文件和mapper没有映射上"></a>2.xml文件和mapper没有映射上</h3><ul>
+<li>namespace指定映射mapper的路径错误</li>
+<li>id和mapper中的方法名不一致</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gvpnb835pij60te05g0t802.jpg" alt="image-20211023230835681"></p>
+<h3 id="3-xml文件在java目录下而不在resource目录下，因此生成target中无xml"><a href="#3-xml文件在java目录下而不在resource目录下，因此生成target中无xml" class="headerlink" title="3.xml文件在java目录下而不在resource目录下，因此生成target中无xml"></a>3.xml文件在java目录下而不在resource目录下，因此生成target中无xml</h3><h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>​    在使用Mybatis-plus框架时，自定义mapper接口和xm文件时，由于使用的是MP的自动生成代码插件，导致mapper接口和xml文件都在java目录下，而在编译时，在java路径下的xml文件不会被自动编译进去，编译只会识别.java文件，只有在resource下的xml文件在打包时才能编译进去。</p>
+<span id="more"></span>
+
+<p>下图是MP自动生成代码插件的xml和mapper目录（不再resource中）</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gvpmzlnvdzj60ek0z40vj02.jpg" alt="image-20211023225723524"></p>
+<p>而编译出来的target目录下是这样的：</p>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gvpn2f2vraj60i00rggnl02.jpg" alt="image-20211023230007719"></p>
+<h2 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h2><p>1.在pom文件中添加</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 项目打包时会将java目录中的*.xml文件也进行打包 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">directory</span>&gt;</span>src/main/java<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">includes</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">include</span>&gt;</span>**/*.xml<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">includes</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">filtering</span>&gt;</span>false<span class="tag">&lt;/<span class="name">filtering</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>2.手动将java目录下的xml文件移到resource目录下，并且在Spring Boot中的配置文件中加入</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mybatis-plus:</span><br><span class="line">	mapper-locations: classpath:**/*.xml //classpath后添加你xml文件的目录</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意：博主血的教训！！！"><a href="#注意：博主血的教训！！！" class="headerlink" title="注意：博主血的教训！！！"></a>注意：博主血的教训！！！</h3><p>mapper-locations中的目录一定要是你放置xml文件的目录一致，否则就算target中存在xml文件，也会出现这个错误！！！</p>
+<p>由于本人能力有限，欢迎访问<a target="_blank" rel="noopener" href="https://nero9999.github.io/">个人博客</a>,进行技术交流，如有不足，欢迎指正~</p>
+
       
 
       
@@ -236,6 +263,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">踩坑记录</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -336,7 +374,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3Mybatis-%E6%8A%A5%E9%94%99Invalid-bound-statement-not-found"><span class="toc-number">1.</span> <span class="toc-text">解决Mybatis 报错Invalid bound statement (not found)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BA%E7%8E%B0%E6%AD%A4%E9%94%99%E8%AF%AF%E7%9A%84%E5%8E%9F%E5%9B%A0"><span class="toc-number">1.1.</span> <span class="toc-text">出现此错误的原因</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-xml%E6%96%87%E4%BB%B6%E4%B8%8D%E5%AD%98%E5%9C%A8"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.xml文件不存在</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-xml%E6%96%87%E4%BB%B6%E5%92%8Cmapper%E6%B2%A1%E6%9C%89%E6%98%A0%E5%B0%84%E4%B8%8A"><span class="toc-number">1.1.2.</span> <span class="toc-text">2.xml文件和mapper没有映射上</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-xml%E6%96%87%E4%BB%B6%E5%9C%A8java%E7%9B%AE%E5%BD%95%E4%B8%8B%E8%80%8C%E4%B8%8D%E5%9C%A8resource%E7%9B%AE%E5%BD%95%E4%B8%8B%EF%BC%8C%E5%9B%A0%E6%AD%A4%E7%94%9F%E6%88%90target%E4%B8%AD%E6%97%A0xml"><span class="toc-number">1.1.3.</span> <span class="toc-text">3.xml文件在java目录下而不在resource目录下，因此生成target中无xml</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF"><span class="toc-number">1.2.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-number">1.3.</span> <span class="toc-text">解决方法：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%EF%BC%9A%E5%8D%9A%E4%B8%BB%E8%A1%80%E7%9A%84%E6%95%99%E8%AE%AD%EF%BC%81%EF%BC%81%EF%BC%81"><span class="toc-number">1.3.1.</span> <span class="toc-text">注意：博主血的教训！！！</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -376,7 +414,7 @@
     </li>
     <li class="copyright_update-time">
         <strong >最后更新：</strong>
-        <time datetime="2021-10-23T14:40:46.243Z" itemprop="dateUpdated">2021年10月23日 22:40:46</time>
+        <time datetime="2021-10-23T15:12:46.318Z" itemprop="dateUpdated">2021年10月23日 23:12:46</time>
     </li>
     <!-- 有需要的可以取消注释 -->
     <!-- <li class="copyright_article-titles"><strong >本文标题：</strong>
@@ -508,15 +546,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">springboot</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -524,11 +558,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">踩坑记录</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MyBatis-Plus</a>
+                <a href="javascript:void(0)" class="js-tag color1">springboot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">踩坑记录</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -536,7 +574,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color3">MyBatis-Plus</a>
               </li>
             
             <div class="clearfix"></div>

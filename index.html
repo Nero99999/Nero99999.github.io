@@ -188,7 +188,7 @@
 		<span class="post-meta-item-icon">
 			<i class="fa fa-keyboard-o"></i>
 			<span class="post-meta-item-text">  字数统计: </span>
-			<span class="post-count">0字</span>
+			<span class="post-count">411字</span>
 		</span>
 	</span>
 
@@ -207,6 +207,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+        <h1 id="解决Mybatis-报错Invalid-bound-statement-not-found"><a href="#解决Mybatis-报错Invalid-bound-statement-not-found" class="headerlink" title="解决Mybatis 报错Invalid bound statement (not found)"></a>解决Mybatis 报错Invalid bound statement (not found)</h1><h2 id="出现此错误的原因"><a href="#出现此错误的原因" class="headerlink" title="出现此错误的原因"></a>出现此错误的原因</h2><h3 id="1-xml文件不存在"><a href="#1-xml文件不存在" class="headerlink" title="1.xml文件不存在"></a>1.xml文件不存在</h3><h3 id="2-xml文件和mapper没有映射上"><a href="#2-xml文件和mapper没有映射上" class="headerlink" title="2.xml文件和mapper没有映射上"></a>2.xml文件和mapper没有映射上</h3><ul>
+<li>namespace指定映射mapper的路径错误</li>
+<li>id和mapper中的方法名不一致</li>
+</ul>
+<p><img src="https://tva1.sinaimg.cn/large/008i3skNgy1gvpnb835pij60te05g0t802.jpg" alt="image-20211023230835681"></p>
+<h3 id="3-xml文件在java目录下而不在resource目录下，因此生成target中无xml"><a href="#3-xml文件在java目录下而不在resource目录下，因此生成target中无xml" class="headerlink" title="3.xml文件在java目录下而不在resource目录下，因此生成target中无xml"></a>3.xml文件在java目录下而不在resource目录下，因此生成target中无xml</h3><h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>​    在使用Mybatis-plus框架时，自定义mapper接口和xm文件时，由于使用的是MP的自动生成代码插件，导致mapper接口和xml文件都在java目录下，而在编译时，在java路径下的xml文件不会被自动编译进去，编译只会识别.java文件，只有在resource下的xml文件在打包时才能编译进去。</p>
+        
+          <a class="article-more-a" href="/2021/10/23/%E8%A7%A3%E5%86%B3Mybatis-%E6%8A%A5%E9%94%99Invalid-bound-statement-not-found/#more">more >></a>
         
       
 
@@ -215,6 +223,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">踩坑记录</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -1546,15 +1565,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">js</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">springboot</a>
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1562,11 +1577,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">踩坑记录</a>
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">MyBatis-Plus</a>
+                <a href="javascript:void(0)" class="js-tag color1">springboot</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">踩坑记录</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1574,7 +1593,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color3">MyBatis-Plus</a>
               </li>
             
             <div class="clearfix"></div>
